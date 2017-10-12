@@ -14,19 +14,28 @@ source:
     - https://cran.r-project.org/src/contrib/Archive/rngtools/rngtools_{{ version }}.tar.gz
   sha256: 27019835b750f470b13dbb7fecd3b839a61b52774e23fffa191f919533768fb9
 
+
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
 build:
+  # If this is a new build for the same version, increment the build number.
   number: 0
-  skip: true  # [win32]
+
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
 
+# Suggests: parallel, RUnit, knitr
 requirements:
   build:
     - r-base
     - r-digest
     - r-pkgmaker >=0.20
     - r-stringr
+
   run:
     - r-base
     - r-digest
@@ -35,8 +44,15 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('rngtools')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('rngtools')"           # [not win]
     - "\"%R%\" -e \"library('rngtools')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
 
 about:
   home: https://renozao.github.io/rngtools
@@ -52,3 +68,30 @@ extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: rngtools
+# Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>
+# Author: Renaud Gaujoux
+# Version: 1.2.4
+# License: GPL-3
+# Title: Utility functions for working with Random Number Generators
+# Description: This package contains a set of functions for working with Random Number Generators (RNGs). In particular, it defines a generic S4 framework for getting/setting the current RNG, or RNG data that are embedded into objects for reproducibility. Notably, convenient default methods greatly facilitate the way current RNG settings can be changed.
+# URL: https://renozao.github.io/rngtools
+# BugReports: http://github.com/renozao/rngtools/issues
+# SCM: github:renozao, r-forge
+# Depends: R (>= 3.0.0), methods, pkgmaker (>= 0.20)
+# Imports: stringr, digest
+# Suggests: parallel, RUnit, knitr
+# Collate: 'rngtools-package.r' 'format.R' 'RNG.R' 'RNGseq.R'
+# VignetteBuilder: knitr
+# Packaged: 2014-03-06 13:11:11 UTC; renaud
+# NeedsCompilation: no
+# Repository: CRAN
+# Date/Publication: 2014-03-06 22:18:10
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
