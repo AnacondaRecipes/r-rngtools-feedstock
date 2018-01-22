@@ -10,8 +10,8 @@ package:
 source:
   fn: rngtools_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/rngtools_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/rngtools/rngtools_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/rngtools_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/rngtools/rngtools_{{ version }}.tar.gz
   sha256: 27019835b750f470b13dbb7fecd3b839a61b52774e23fffa191f919533768fb9
 
 
